@@ -7,31 +7,51 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
     </head>
     <body>
-        <main class = "container">
-            <div class = "jumbotron jumbotron-fluid row">
-                <h1 class="display-4">Night on the Town</h1>
+        <div id="wrapper">
+        <main class = "container p-0">
+            <div class = "jumbotron jumbotron-fluid">
+                <div class="row">
+                    <h1 class="display-4 p-4 mb-4">Night on the Town</h1>
+                </div>
+                <div class="row my-4 py-4">
+                    <div class="col-7"></div>
+                    <p class="col" id="courtesy">Photo Courtesy of Glenn Petranek &copy; 2016</p>
+                </div>
             </div>
 
             <form class = "row">
-                <div class = "form-group">
+                <div class = "form-group col-6">
                     <label for = "location-input">Location:</label>
-                    <input type = "text" class = "form-control" id = "location-input" placeholder = "City, State or Zipcode">
+                    <input type = "text" class = "form-control" id = "location-input" placeholder = '"City, State" or "Zipcode"'>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-6">
                     <label for = "date-input">Date:</label> 
                     <input type = "date" class = "form-control" id = "date-input">
                 </div>
             </form>
         
             <div class = "row" id = "button-holder">
-                <button class = "btn" id = "event-button">EVENTS</button>
-                <button class = "btn" id = "bar-button">BARS</button>
-                <button class = "btn" id = "food-button">RESTAURANTS</button>
+                <div class="col-4">
+                    <button class = "btn" id = "event-button">EVENTS</button>
+                </div>
+                <div class="col-4">
+                    <button class = "btn" id = "bar-button">BARS</button>
+                </div>
+                <div class="col-4">
+                    <button class = "btn" id = "food-button">RESTAURANTS</button>
+                </div>
+            </div>
+            <div class="row" id="example-holder">
+                <div class="col-4" id="event-example"></div>
+                <div class="col-4" id="bar-example"></div>
+                <div class="col-4" id="food-example"></div>
             </div>
             <div class = "row" id="result-holder"></div>
         
-        </main> 
+        </main>
+        </div>
     </body>
 </html>
