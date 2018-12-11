@@ -1,0 +1,19 @@
+.jumbotron {
+    background-image: url(../images/image_from_ios.jpg);
+    background-position: center;
+    overflow: cover;
+    height: 400px;
+    font-family: 'Abril Fatface', sans-serif;
+    color:whitesmoke;
+    font-size: larger;
+    text-shadow: 5px 5px 15px #111111;
+}
+
+#wrapper {
+    background: #111111;
+    height: 150vh;
+}
+
+.form-group {
+    color: whitesmoke;
+}
