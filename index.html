@@ -2,10 +2,36 @@
 <html lang="en-us">
     <head>
         <meta charset="UTF-8">
-        <title>This is a basic branch test.</title>
+        <title>Night on the Town</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     </head>
     <body>
-        <h1>This is a basic branch test.</h1>
-        <p>Yay!</p>
+        <main class = "container">
+            <div class = "jumbotron jumbotron-fluid row">
+                <h1 class="display-4">Night on the Town</h1>
+            </div>
+
+            <form class = "row">
+                <div class = "form-group">
+                    <label for = "location-input">Location:</label>
+                    <input type = "text" class = "form-control" id = "location-input" placeholder = "City, State or Zipcode">
+                </div>
+                <div class="form-group">
+                    <label for = "date-input">Date:</label> 
+                    <input type = "date" class = "form-control" id = "date-input">
+                </div>
+            </form>
+        
+            <div class = "row" id = "button-holder">
+                <button class = "btn" id = "event-button">EVENTS</button>
+                <button class = "btn" id = "bar-button">BARS</button>
+                <button class = "btn" id = "food-button">RESTAURANTS</button>
+            </div>
+            <div class = "row" id="result-holder"></div>
+        
+        </main> 
     </body>
 </html>
