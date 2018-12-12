@@ -11,9 +11,17 @@
 
 #wrapper {
     background: #111111;
-    height: 150vh;
+    height: 150%;
 }
 
 .form-group {
     color: whitesmoke;
+}
+
+#result-holder, #event-example {
+    color: whitesmoke;
+}
+
+#event {
+    border:ridge;
 }
