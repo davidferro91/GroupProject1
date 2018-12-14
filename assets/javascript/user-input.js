@@ -4,6 +4,7 @@ var longitude;
 var latitude;
 var zipcode;
 var date = moment().format("YYYY-MM-DD");
+$("#date-input").attr("value", date)
 
 
 //get user location via geolocation and stores longitude and latitude, this is called on load
@@ -43,7 +44,7 @@ $("#submit-button").on("click", function(event){
         })
             .then(function(response){
                 console.log(response);
-                zipcode = response.zip_codes[1];
+                zipcode = response.zip_codes[0];
                 console.log(zipcode);
             })
     }
