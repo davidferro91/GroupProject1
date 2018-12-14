@@ -1,6 +1,6 @@
 var latitude = 41.50;
 var longitude = -81.61;
-var date = "2018-12-22";
+var date = "2018-12-23";
 
 function eventGenerator (response, i) {
     var eventHolder =  $("<div>");
@@ -15,7 +15,8 @@ function eventGenerator (response, i) {
     eventBox.append(titleHolder);
     var timeHolder = $("<p>");
     var eventTime = response.events[i].datetime_local;
-    timeHolder.text(eventTime);
+    var eventTimeConverted = moment(eventTime);
+    timeHolder.text(moment(eventTimeConverted).format("MMMM DD, YYYY: LT"));
     eventBox.append(timeHolder);
     var imageHolder = $("<img>");
     imageHolder.attr("src", response.events[i].performers[0].image);
