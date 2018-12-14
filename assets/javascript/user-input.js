@@ -1,9 +1,10 @@
 window.onload = function(){
 //document ready
-var longitude = "";
-var latitude = "";
+var longitude;
+var latitude;
 var zipcode;
 var date = moment().format("YYYY-MM-DD");
+$("#date-input").attr("value", date)
 
 
 //get user location via geolocation and stores longitude and latitude, this is called on load
@@ -31,17 +32,10 @@ $("#submit-button").on("click", function(event){
     event.preventDefault();
     //get user entered date
     date = $("#date-input").val();
-    //get lat/long from user location
-    locationInput = $("#location-input").val().trim();
-    //check if input is a number
-    locationCheck = $.isNumeric(locationInput);
-    //if entry is not zipcode convert to zipcode
-    if (locationCheck == false){
-        //need to split city from state 
-        var locationSplit = locationInput.split(",")
-        var city = locationSplit[0].trim();
-        var state = locationSplit[1].trim();
-        //get zipcode for city and state
+    //if zipcode is not entered
+    if($("#zipcode-input").val() == ""){
+        var city = $("#city-input").val().trim();
+        var state = $("#state-input").val();
         var apiKey = "l9q0mOZpkOQJ2keHRlEisVi8HOMgGRkkPZKSGhHh3n5OqSVRRUzVqDs42RvVbkjE"
         var queryURL = "https://www.zipcodeapi.com/rest/" + apiKey + "/city-zips.json/"+ city + "/" + state;
         $.ajax({
@@ -49,17 +43,16 @@ $("#submit-button").on("click", function(event){
         method: "GET"
         })
             .then(function(response){
-                console.log(response)
-                zipcode = response.zip_codes[1]
-                console.log(zipcode)
+                console.log(response);
+                zipcode = response.zip_codes[0];
+                console.log(zipcode);
             })
-            
     }
+    //if zipcode is entered
     else{
-        zipcode = locationInput;
-        console.log(zipcode)
-
-        var apiKey = "l9q0mOZpkOQJ2keHRlEisVi8HOMgGRkkPZKSGhHh3n5OqSVRRUzVqDs42RvVbkjE"
+        zipcode=$("#zipcode-input").val();
+    }
+    var apiKey = "l9q0mOZpkOQJ2keHRlEisVi8HOMgGRkkPZKSGhHh3n5OqSVRRUzVqDs42RvVbkjE"
         var queryURL = "https://www.zipcodeapi.com/rest/"+ apiKey + "/info.json/"+ zipcode + "/degrees";
         $.ajax({
         url: queryURL,
@@ -67,13 +60,11 @@ $("#submit-button").on("click", function(event){
         })
             .then(function(response){
                 console.log(response)
-                console.log(response.lat)
+                latitude = response.lat;
+                longitude = response.lng;
             })
-    }
-    //get lat/long from zipcode
-  
-    
-    
+
+
 })
 
 
