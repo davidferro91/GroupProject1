@@ -2,6 +2,7 @@ window.onload = function(){
 //document ready
 var longitude = "";
 var latitude = "";
+var zipcode;
 var date = moment().format("YYYY-MM-DD");
 
 
@@ -37,7 +38,6 @@ $("#submit-button").on("click", function(event){
     //if entry is not zipcode convert to zipcode
     if (locationCheck == false){
         //need to split city from state 
-        console.log("not number")
         var locationSplit = locationInput.split(",")
         var city = locationSplit[0].trim();
         var state = locationSplit[1].trim();
@@ -50,23 +50,28 @@ $("#submit-button").on("click", function(event){
         })
             .then(function(response){
                 console.log(response)
-                //grab zipcode here
+                zipcode = response.zip_codes[1]
+                console.log(zipcode)
             })
+            
     }
     else{
         zipcode = locationInput;
         console.log(zipcode)
+
+        var apiKey = "l9q0mOZpkOQJ2keHRlEisVi8HOMgGRkkPZKSGhHh3n5OqSVRRUzVqDs42RvVbkjE"
+        var queryURL = "https://www.zipcodeapi.com/rest/"+ apiKey + "/info.json/"+ zipcode + "/degrees";
+        $.ajax({
+        url: queryURL,
+        method: "GET"
+        })
+            .then(function(response){
+                console.log(response)
+                console.log(response.lat)
+            })
     }
     //get lat/long from zipcode
-    var apiKey = "l9q0mOZpkOQJ2keHRlEisVi8HOMgGRkkPZKSGhHh3n5OqSVRRUzVqDs42RvVbkjE"
-    var queryURL = "https://www.zipcodeapi.com/rest/"+ apiKey + "/info.json/"+ zipcode + "/degrees";
-    $.ajax({
-    url: queryURL,
-    method: "GET"
-    })
-        .then(function(response){
-            console.log(response)
-        })
+  
     
     
 })
