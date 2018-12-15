@@ -11,6 +11,7 @@
     barsBox.addClass("col");
     barsBox.attr("id", "bars-box");
     var nameHolder = $("<p>");
+    
     var barsName = response.businesses[i].name;
     nameHolder.text(barsName);
     barsBox.append(nameHolder);
