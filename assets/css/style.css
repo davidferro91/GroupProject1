@@ -18,10 +18,15 @@
     color: whitesmoke;
 }
 
-#result-holder, #event-example {
+#result-holder, #event-example, #bar-example {
     color: whitesmoke;
 }
 
-#event {
+#event, #bars {
     border:ridge;
+}
+
+#bar-image {
+    height: 210px;
+    width: 280px;
 }
