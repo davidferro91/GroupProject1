@@ -37,38 +37,54 @@ for(i = 0; i < states.length; i++){
 //if data is entered by user
 $("#submit-button").on("click", function(event){
     event.preventDefault();
+    
     //get user entered date
     date = $("#date-input").val();
+    
+    //if date is before current date
+   if (moment(date, "YYYY-MM-DD").isBefore(moment().format("YYYY-MM-DD"))){
+       $("#date-input").addClass("invalid-input");
+    }
+    //if didn't enter city or zipcode
+    if(($("#zipcode-input").val() == "") && ($("#city-input").val() == "")){
+        $("#zipcode-input").addClass("invalid-input")
+        $("#city-input").addClass("invalid-input")
+    }
+
     //if zipcode is not entered
     if($("#zipcode-input").val() == ""){
         var city = $("#city-input").val().trim();
         var state = $("#state-input").val();
-        var apiKey = "l9q0mOZpkOQJ2keHRlEisVi8HOMgGRkkPZKSGhHh3n5OqSVRRUzVqDs42RvVbkjE"
-        var queryURL = "https://www.zipcodeapi.com/rest/" + apiKey + "/city-zips.json/"+ city + "/" + state;
-        $.ajax({
-        url: queryURL,
-        method: "GET"
-        })
-            .then(function(response){
-                console.log(response);
-                zipcode = response.zip_codes[0];
-                console.log(zipcode);
-            })
-    }
-    //if zipcode is entered
-    else{
-        zipcode=$("#zipcode-input").val();
-    }
-    var apiKey = "l9q0mOZpkOQJ2keHRlEisVi8HOMgGRkkPZKSGhHh3n5OqSVRRUzVqDs42RvVbkjE"
-        var queryURL = "https://www.zipcodeapi.com/rest/"+ apiKey + "/info.json/"+ zipcode + "/degrees";
+        var queryURL = "http://api.zippopotam.us/us/" + state + "/" + city
         $.ajax({
         url: queryURL,
         method: "GET"
         })
             .then(function(response){
                 console.log(response)
-                latitude = response.lat;
-                longitude = response.lng;
+                latitude = response.places[0].latitude
+                longitude = response.places[0].longitude
+                console.log(latitude)
+                console.log(longitude)
+                
+            })
+    }
+    
+    //if zipcode is entered
+    else{
+        zipcode=$("#zipcode-input").val();
+    }
+        var queryURL = "http://api.zippopotam.us/us/" + zipcode
+        $.ajax({
+        url: queryURL,
+        method: "GET"
+        })
+            .then(function(response){
+                console.log(response)
+                latitude = response.places[0].latitude
+                longitude = response.places[0].longitude
+                console.log(latitude)
+                console.log(longitude)
             })
 
 
