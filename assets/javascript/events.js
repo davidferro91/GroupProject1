@@ -79,7 +79,7 @@ function eventGenerator (response, i) {
 
 function exampleEventGenerator (response, i) {
     var eventHolder =  $("<div>");
-    eventHolder.addClass("row m-2 p-4");
+    eventHolder.addClass("row m-2 p-4 rounded");
     eventHolder.attr("id", "event");
     var eventBox = $("<div>");
     eventBox.addClass("col");
