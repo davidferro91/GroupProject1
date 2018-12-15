@@ -9,8 +9,9 @@
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-        <script src="assets/javascript/user-input.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     </head>
 
     <body>
@@ -47,6 +48,12 @@
                 <button type="submit" class="btn" id="submit-button">Submit</button>
             </form>
         
+            <div class="row" id="example-holder">
+                <div class="col-4" id="event-example"></div>
+                <div class="col-4" id="bar-example"></div>
+                <div class="col-4" id="food-example"></div>
+            </div>
+
             <div class="row" id="button-holder">
                 <div class="col-4">
                     <button class="btn" id="event-button">EVENTS</button>
@@ -58,17 +65,15 @@
                     <button class="btn" id="food-button">RESTAURANTS</button>
                 </div>
             </div>
-            
-            <div class="row" id="example-holder">
-                <div class="col-4" id="event-example"></div>
-                <div class="col-4" id="bar-example"></div>
-                <div class="col-4" id="food-example"></div>
-            </div>
+
             <div id="result-holder"></div>
         
         </main>
         </div>
+        <script type="text/javascript" src="assets/javascript/user-input.js"></script>
         <script type="text/javascript" src="assets/javascript/events.js"></script>
         <script type="text/javascript" src="assets/javascript/bars.js"></script>
+        <script type="text/javascript" src="assets/javascript/restaurants2"></script>
+        <script>AOS.init();</script>
     </body>
 </html>

@@ -7,6 +7,10 @@ function eventGenerator (response, i) {
     var eventHolder =  $("<div>");
     eventHolder.addClass("row m-2 p-4 rounded");
     eventHolder.attr("id", "event");
+    eventHolder.attr("data-aos", "zoom-in-up");
+    eventHolder.attr("data-aos-anchor-placement", "bottom-bottom");
+    eventHolder.attr("data-aos-delay", "500");
+    eventHolder.attr("data-aos-duration", "1000");
     var eventBox1 = $("<div>");
     eventBox1.addClass("col-6");
     eventBox1.attr("id", "event-box");
@@ -128,6 +132,6 @@ $.ajax({
     $("#event-example").append(exampleEventGenerator(response, 0));
     for (var i = 0; i < response.events.length; i++) {
         $("#result-holder").append(eventGenerator(response, i));
+        $("#result-holder").append("<br>");
     }
 });
-
