@@ -14,6 +14,12 @@
     var barsName = response.businesses[i].name;
     nameHolder.text(barsName);
     barsBox.append(nameHolder);
+
+    var priceHolder = $("<p>");
+    var barsprice = response.businesses[i].price;
+    priceHolder.text("Price Level: " + barsprice);
+    barsBox.append(priceHolder);
+
     
 
     var phoneHolder = $("<p>");
