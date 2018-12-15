@@ -1,7 +1,8 @@
 window.onload = function(){
 //document ready
-var longitude;
-var latitude;
+var validInput = true;
+var longitude = -81.667;
+var latitude = 41.4946;
 var zipcode;
 var date = moment().format("YYYY-MM-DD");
 $("#date-input").attr("value", date)
@@ -37,18 +38,20 @@ for(i = 0; i < states.length; i++){
 //if data is entered by user
 $("#submit-button").on("click", function(event){
     event.preventDefault();
-    
+    errorReset();
     //get user entered date
     date = $("#date-input").val();
     
     //if date is before current date
-   if (moment(date, "YYYY-MM-DD").isBefore(moment().format("YYYY-MM-DD"))){
+    if (moment(date, "YYYY-MM-DD").isBefore(moment().format("YYYY-MM-DD"))){
        $("#date-input").addClass("invalid-input");
+       validInput = false;
     }
     //if didn't enter city or zipcode
     if(($("#zipcode-input").val() == "") && ($("#city-input").val() == "")){
         $("#zipcode-input").addClass("invalid-input")
         $("#city-input").addClass("invalid-input")
+        validInput = false;
     }
 
     //if zipcode is not entered
@@ -58,14 +61,21 @@ $("#submit-button").on("click", function(event){
         var queryURL = "http://api.zippopotam.us/us/" + state + "/" + city
         $.ajax({
         url: queryURL,
-        method: "GET"
+        method: "GET",
+        error: function(xhr, status) {
+            console.log("ERROR")
+            $("#city-input").addClass("invalid-input")
+            validInput = false;
+        }
         })
-            .then(function(response){
+            .then(function(response){ 
+                if(validInput == true){
                 console.log(response)
                 latitude = response.places[0].latitude
                 longitude = response.places[0].longitude
                 console.log(latitude)
                 console.log(longitude)
+                }
                 
             })
     }
@@ -77,20 +87,33 @@ $("#submit-button").on("click", function(event){
         var queryURL = "http://api.zippopotam.us/us/" + zipcode
         $.ajax({
         url: queryURL,
-        method: "GET"
+        method: "GET",
+        error: function(xhr, status) {
+            console.log("ERROR")
+            $("#zipcode-input").addClass("invalid-input")
+            validInput = false;
+        }
         })
             .then(function(response){
+                if(validInput == true){
                 console.log(response)
                 latitude = response.places[0].latitude
                 longitude = response.places[0].longitude
                 console.log(latitude)
                 console.log(longitude)
+                }
             })
 
 
 })
 
-
+//function to reset error class
+function errorReset (){
+    $("#city-input").removeClass("invalid-input")
+    $("#zipcode-input").removeClass("invalid-input")
+    $("#date-input").removeClass("invalid-input")
+    validInput = true;
+}
 
 
 } //end of onload
