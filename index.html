@@ -12,10 +12,11 @@
         <script src="assets/javascript/user-input.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
     </head>
+
     <body>
         <div id="wrapper">
-        <main class = "container p-0">
-            <div class = "jumbotron jumbotron-fluid">
+        <main class="container p-0">
+            <div class="jumbotron jumbotron-fluid rounded">
                 <div class="row">
                     <h1 class="display-4 p-4 mb-4">Night on the Town</h1>
                 </div>
@@ -25,37 +26,38 @@
                 </div>
             </div>
 
-            <form class = "row">
-                <div class = "form-group col-4">
-                    <label for ="location-input">City:</label>
+            <form class="row">
+                <div class="form-group col-4">
+                    <label for="location-input">City:</label>
                     <input type="text" class="form-control" id="city-input" placeholder="City">
                 </div>
-                <div class = "form-group col-1">
-                    <label for = "state-input">State:</label>
+                <div class="form-group col-1">
+                    <label for="state-input">State:</label>
                     <input type="text" class="form-control" id="state-input" placeholder="State" minlength="2" maxlength="2">
                 </div>
-                <div class = "form-group col-2">
-                    <label for = "zipcode-input">Zipcode:</label>
-                    <input type = "text" class = "form-control" id = "zipcode-input" placeholder = "Zipcode" minlength="5" maxlength="5">
+                <div class="form-group col-2">
+                    <label for="zipcode-input">Zipcode:</label>
+                    <input type="text" class="form-control" id="zipcode-input" placeholder="Zipcode" minlength="5" maxlength="5">
                 </div>
                 <div class="form-group col-3">
-                    <label for = "date-input">Date:</label> 
-                    <input type = "date" class = "form-control" id = "date-input">
+                    <label for="date-input">Date:</label> 
+                    <input type="date" class="form-control" id="date-input">
                 </div>
                 <button type="submit" class="btn" id="submit-button">Submit</button>
             </form>
         
-            <div class = "row" id = "button-holder">
+            <div class="row" id="button-holder">
                 <div class="col-4">
-                    <button class = "btn" id = "event-button">EVENTS</button>
+                    <button class="btn" id="event-button">EVENTS</button>
                 </div>
                 <div class="col-4">
-                    <button class = "btn" id = "bar-button">BARS</button>
+                    <button class="btn" id="bar-button">BARS</button>
                 </div>
                 <div class="col-4">
-                    <button class = "btn" id = "food-button">RESTAURANTS</button>
+                    <button class="btn" id="food-button">RESTAURANTS</button>
                 </div>
             </div>
+            
             <div class="row" id="example-holder">
                 <div class="col-4" id="event-example"></div>
                 <div class="col-4" id="bar-example"></div>

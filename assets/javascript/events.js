@@ -5,7 +5,7 @@ var resultNumber = 20;
 
 function eventGenerator (response, i) {
     var eventHolder =  $("<div>");
-    eventHolder.addClass("row m-2 p-4");
+    eventHolder.addClass("row m-2 p-4 rounded");
     eventHolder.attr("id", "event");
     var eventBox1 = $("<div>");
     eventBox1.addClass("col-6");
@@ -29,7 +29,7 @@ function eventGenerator (response, i) {
 
     //Showing Image
     var imageHolder = $("<img>");
-    imageHolder.addClass("m-2");
+    imageHolder.addClass("m-2 rounded");
     imageHolder.attr("src", response.events[i].performers[0].image);
     imageHolder.attr("id", "performer-image");
     imageHolder.attr("alt", response.events[i].title);
@@ -100,7 +100,7 @@ function exampleEventGenerator (response, i) {
 
     //Showing Image
     var imageHolder = $("<img>");
-    imageHolder.addClass("m-2");
+    imageHolder.addClass("my-2 rounded");
     imageHolder.attr("src", response.events[i].performers[0].image);
     imageHolder.attr("id", "performer-image");
     imageHolder.attr("alt", response.events[i].title);
