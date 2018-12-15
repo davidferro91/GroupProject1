@@ -25,8 +25,12 @@
 #event, #bars {
     border:ridge;
 }
-
-#bar-image {
+.invalid-input{
+    border-color: red;
+    border-style: solid;
+    border-width: 2px;
+}
+#bar-image{
     height: 210px;
     width: 280px;
 }
