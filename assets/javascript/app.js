@@ -1,9 +1,7 @@
     var validInput = true;
-    // var longitude = -81.667;
-    // var latitude = 41.4946;
-    var longitude;
-    var latitude;
-    var resultNumber = 20;
+    var latitude = 41.50;
+    var longitude = -81.69;
+    var resultNumber = 50;
     var zipcode;
     var date = moment().format("YYYY-MM-DD");
     $("#date-input").attr("value", date);
@@ -38,9 +36,6 @@
         restAPICall();
     }
 
-    //call function on page load
-    getLocation();
-        
     //if data is entered by user
     $("#submit-button").on("click", function(event) {
         event.preventDefault();
@@ -510,7 +505,7 @@
 
     function restAPICall () {
         $("#food-example").empty();
-        var restaurantQueryURL = "https://developers.zomato.com/api/v2.1/search?count=" + resultNumber + "&lat="+ latitude +"&lon=" + longitude + "&radius=20000&sort=rating";
+        var restaurantQueryURL = "https://developers.zomato.com/api/v2.1/search?count=" + resultNumber + "&lat="+ latitude +"&lon=" + longitude + "&radius=10000&sort=real_distance";
     
         $.ajax({
             url: restaurantQueryURL,
@@ -562,7 +557,7 @@
     });
 
     $("#food-button").on("click", function() {
-        var restaurantQueryURL = "https://developers.zomato.com/api/v2.1/search?count=" + resultNumber + "&lat="+ latitude +"&lon=" + longitude + "&radius=20000&sort=rating";
+        var restaurantQueryURL = "https://developers.zomato.com/api/v2.1/search?count=" + resultNumber + "&lat="+ latitude +"&lon=" + longitude + "&radius=10000&sort=real_distance";
     
         $.ajax({
             url: restaurantQueryURL,
@@ -579,4 +574,10 @@
                 $("#result-holder").append("<br>");
             }
         });
-    });    
+    });
+
+    //call function on page load
+    getLocation();
+    eventAPICall();
+    barAPICall();
+    restAPICall();
