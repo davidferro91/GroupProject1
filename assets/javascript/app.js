@@ -10,7 +10,7 @@
     
     //create dropdown options for state box
     var states = ["AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"];
-    console.log(states.length);
+    // console.log(states.length);
     for (i = 0; i < states.length; i++) {
         opt = "<option>" + states[i] + "</option>";
         $("#state-input").append(opt);
@@ -35,6 +35,7 @@
         console.log("longitude: " + longitude);
         eventAPICall();
         barAPICall();
+        restAPICall();
     }
 
     //call function on page load
@@ -82,6 +83,7 @@
                     console.log(longitude);
                     eventAPICall();
                     barAPICall();
+                    restAPICall();
                 }        
             });
         }
@@ -109,6 +111,7 @@
                     console.log(longitude);
                     eventAPICall();
                     barAPICall();
+                    restAPICall();
                 }
             });
         }
@@ -203,10 +206,9 @@
         return eventHolder;
     }
     
-    
     function exampleEventGenerator (response, i) {
         var eventHolder =  $("<div>");
-        eventHolder.addClass("row m-2 p-4 rounded");
+        eventHolder.addClass("row m-1 p-4 rounded");
         eventHolder.attr("id", "event");
         var eventBox = $("<div>");
         eventBox.addClass("col");
@@ -313,10 +315,9 @@
         return barHolder;
     }
     
-    
     function exampleBarGenerator (response, i) {
         var barHolder =  $("<div>");
-        barHolder.addClass("row m-2 p-4 rounded");
+        barHolder.addClass("row m-1 p-4 rounded");
         barHolder.attr("id", "bar");
         var barBox = $("<div>");
         barBox.addClass("col");
@@ -353,6 +354,129 @@
         return barHolder;
     }
 
+    function restaurantGenerator (response, i) {
+        var restHolder =  $("<div>");
+        restHolder.addClass("row m-2 p-4 rounded");
+        restHolder.attr("id", "restaurant");
+        restHolder.attr("data-aos", "zoom-in-up");
+        restHolder.attr("data-aos-anchor-placement", "center-bottom");
+        restHolder.attr("data-aos-delay", "500");
+        restHolder.attr("data-aos-duration", "500");
+        var restBox1 = $("<div>");
+        restBox1.addClass("col-6");
+        restBox1.attr("id", "rest-box");
+        var restBox2 = $("<div>");
+        restBox2.addClass("col-6");
+        restBox2.attr("id", "rest-box");
+    
+        // Showing restaurant name
+        var nameHolder = $("<p>");
+        var restName = response.restaurants[i].restaurant.name;
+        nameHolder.text(restName);
+        restBox1.append(nameHolder);
+    
+        //Showing cuisine types
+        var cuisineHolder = $("<p>");
+        var cuisineType = response.restaurants[i].restaurant.cuisines;
+        cuisineHolder.text(cuisineType);
+        restBox1.append(cuisineHolder);
+
+        //Showing Stock Food Photo
+        var stockImageHolder = $("<img>");
+        stockImageHolder.addClass("m-2 rounded");
+        stockImageHolder.attr("src", "assets/images/food_stock_photo.jpg");
+        stockImageHolder.attr("id", "food-image");
+        stockImageHolder.attr("alt", "stock_food_photo");
+        restBox1.append(stockImageHolder);
+        restHolder.append(restBox1);
+    
+        //Listing Address
+        var restAddressHolder = $("<div>");
+        var restAddLine = $("<p>");
+        var restAddress = response.restaurants[i].restaurant.location.address;
+        restAddLine.text(restAddress);
+        restAddressHolder.append(restAddLine);
+        var restLocHolder = $("<p>");
+        var restLocality = response.restaurants[i].restaurant.location.locality_verbose;
+        restLocHolder.text(restLocality);
+        restAddressHolder.append(restLocHolder);
+        restBox2.append(restAddressHolder);
+
+        //Showing Image URL
+        var restImageUrl = $("<a>");
+        restImageUrl.addClass("row p-3");
+        restImageUrl.attr("target", "_blank");
+        restImageUrl.attr("href", response.restaurants[i].restaurant.photos_url);
+        restImageUrl.text("See our images here!");
+        restBox2.append(restImageUrl);
+
+        //Showing Menu URL
+        var restMenuUrl = $("<a>");
+        restMenuUrl.addClass("row p-3");
+        restMenuUrl.attr("target", "_blank");
+        restMenuUrl.attr("href", response.restaurants[i].restaurant.menu_url);
+        restMenuUrl.text("See our menu here!");
+        restBox2.append(restMenuUrl);
+
+        //Showing Average Price for Two
+        var restPrice = response.restaurants[i].restaurant.average_cost_for_two;
+        if (restPrice > 0) {
+            var restPriceHolder = $("<p>");
+            restPriceHolder.text("Average cost for two: $" + restPrice);
+            restBox2.append(restPriceHolder);
+        }
+
+        //Showing Ratings
+        var userRating = response.restaurants[i].restaurant.user_rating.aggregate_rating;
+        if (userRating > 0) {
+            var ratingHolder = $("<p>");
+            var ratingText = response.restaurants[i].restaurant.user_rating.rating_text;
+            ratingHolder.text(ratingText + " rating: " + userRating);
+            restBox2.append(ratingHolder);
+        }
+        restHolder.append(restBox2);
+        return restHolder;
+    }
+        
+    function exampleRestGenerator (response, i) {
+        var restHolder =  $("<div>");
+        restHolder.addClass("row m-1 p-4 rounded");
+        restHolder.attr("id", "restaurant");
+        var restBox = $("<div>");
+        restBox.addClass("col");
+        restBox.attr("id", "rest-box");
+    
+        // Showing restaurant name
+        var nameHolder = $("<p>");
+        var restName = response.restaurants[i].restaurant.name;
+        nameHolder.text(restName);
+        restBox.append(nameHolder);
+    
+        //Showing cuisine types
+        var cuisineHolder = $("<p>");
+        var cuisineType = response.restaurants[i].restaurant.cuisines;
+        cuisineHolder.text(cuisineType);
+        restBox.append(cuisineHolder);
+
+        //Showing Stock Food Photo
+        var stockImageHolder = $("<img>");
+        stockImageHolder.addClass("my-2 rounded");
+        stockImageHolder.attr("src", "assets/images/food_stock_photo.jpg");
+        stockImageHolder.attr("id", "food-image");
+        stockImageHolder.attr("alt", "stock_food_photo");
+        restBox.append(stockImageHolder);
+
+        //Showing Menu URL
+        var restMenuUrl = $("<a>");
+        restMenuUrl.addClass("row p-3");
+        restMenuUrl.attr("target", "_blank");
+        restMenuUrl.attr("href", response.restaurants[i].restaurant.menu_url);
+        restMenuUrl.text("See our menu here!");
+        restBox.append(restMenuUrl);
+        restHolder.append(restBox);
+        return restHolder;
+    }
+
 
     function eventAPICall () {
         $("#event-example").empty();
@@ -369,7 +493,7 @@
 
     function barAPICall () {
         $("#bar-example").empty();
-        var barQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=bars&latitude=" + latitude + "&longitude=" + longitude + "&sort_by=rating";
+        var barQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=bars&latitude=" + latitude + "&longitude=" + longitude + "&sort_by=rating&limit=" + resultNumber;
     
         $.ajax({
             url: barQueryURL,
@@ -381,6 +505,23 @@
         }).then(function(response) { 
             console.log(response);
             $("#bar-example").append(exampleBarGenerator(response, 0));
+        });
+    }
+
+    function restAPICall () {
+        $("#food-example").empty();
+        var restaurantQueryURL = "https://developers.zomato.com/api/v2.1/search?count=" + resultNumber + "&lat="+ latitude +"&lon=" + longitude + "&radius=20000&sort=rating";
+    
+        $.ajax({
+            url: restaurantQueryURL,
+            headers: {
+                "user-key": "152c06012922cebbca2dce06afb59357"
+            },
+            method: "GET",
+            dataType: "json"
+        }).then(function(response) {
+            console.log(response);
+            $("#food-example").append(exampleRestGenerator(response, 0));
         });
     }
 
@@ -401,7 +542,7 @@
     });
 
     $("#bar-button").on("click", function() {
-        var barQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=bars&latitude=" + latitude + "&longitude=" + longitude + "&sort_by=rating";
+        var barQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=bars&latitude=" + latitude + "&longitude=" + longitude + "&sort_by=rating&limit=" + resultNumber;
     
         $.ajax({
             url: barQueryURL,
@@ -418,5 +559,24 @@
                 $("#result-holder").append("<br>");
             }
         });
-    })
+    });
 
+    $("#food-button").on("click", function() {
+        var restaurantQueryURL = "https://developers.zomato.com/api/v2.1/search?count=" + resultNumber + "&lat="+ latitude +"&lon=" + longitude + "&radius=20000&sort=rating";
+    
+        $.ajax({
+            url: restaurantQueryURL,
+            headers: {
+                "user-key": "152c06012922cebbca2dce06afb59357"
+            },
+            method: "GET",
+            dataType: "json"
+        }).then(function(response) {
+            console.log(response);
+            $("#result-holder").empty();
+            for (var i = 0; i < response.restaurants.length; i++) {
+                $("#result-holder").append(restaurantGenerator(response, i));
+                $("#result-holder").append("<br>");
+            }
+        });
+    });    
