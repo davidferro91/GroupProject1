@@ -1,4 +1,4 @@
-window.onload = function(){
+window.onload = function() {
 //document ready
 var validInput = true;
 var longitude = -81.667;
