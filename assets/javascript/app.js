@@ -474,20 +474,21 @@
 
 
     function eventAPICall () {
-        $("#event-example").empty();
+        // $("#event-example").empty();
         var eventQueryURL = "https://api.seatgeek.com/2/events?client_id=MTQzMzg2MzV8MTU0NDQ5MjAwMi4xNg&client_secret=07a2f186cd6c200528c78f45c202b99f757f075db02c6aee3b12efda60c06fcf&lat="+ latitude +"&lon=" + longitude + "&datetime_local.gte=" + date + "&per_page=" + resultNumber;
     
         $.ajax({
             url: eventQueryURL,
             method: "GET"
         }).then(function(response) {
+            $("#event-example").empty();
             console.log(response);
             $("#event-example").append(exampleEventGenerator(response, 0));
         });
     }
 
     function barAPICall () {
-        $("#bar-example").empty();
+        // $("#bar-example").empty();
         var barQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=bars&latitude=" + latitude + "&longitude=" + longitude + "&sort_by=rating&limit=" + resultNumber;
     
         $.ajax({
@@ -497,14 +498,15 @@
             },
             method: "GET",
             dataType: "json"
-        }).then(function(response) { 
+        }).then(function(response) {
+            $("#bar-example").empty();
             console.log(response);
             $("#bar-example").append(exampleBarGenerator(response, 0));
         });
     }
 
     function restAPICall () {
-        $("#food-example").empty();
+        // $("#food-example").empty();
         var restaurantQueryURL = "https://developers.zomato.com/api/v2.1/search?count=" + resultNumber + "&lat="+ latitude +"&lon=" + longitude + "&radius=10000&sort=real_distance";
     
         $.ajax({
@@ -515,6 +517,7 @@
             method: "GET",
             dataType: "json"
         }).then(function(response) {
+            $("#food-example").empty();
             console.log(response);
             $("#food-example").append(exampleRestGenerator(response, 0));
         });
