@@ -1,6 +1,6 @@
-var latitude = 41.50;
-var longitude = -81.61;
-var date = "2018-12-23";
+// var latitude = 41.50;
+// var longitude = -81.61;
+// var date = "2018-12-23";
 var resultNumber = 20;
 
 function eventGenerator (response, i) {
@@ -8,9 +8,9 @@ function eventGenerator (response, i) {
     eventHolder.addClass("row m-2 p-4 rounded");
     eventHolder.attr("id", "event");
     eventHolder.attr("data-aos", "zoom-in-up");
-    eventHolder.attr("data-aos-anchor-placement", "bottom-bottom");
+    eventHolder.attr("data-aos-anchor-placement", "center-bottom");
     eventHolder.attr("data-aos-delay", "500");
-    eventHolder.attr("data-aos-duration", "1000");
+    eventHolder.attr("data-aos-duration", "500");
     var eventBox1 = $("<div>");
     eventBox1.addClass("col-6");
     eventBox1.attr("id", "event-box");

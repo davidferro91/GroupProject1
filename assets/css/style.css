@@ -18,19 +18,20 @@
     color: whitesmoke;
 }
 
-#result-holder, #event-example, #bar-example {
+#result-holder, #event-example, #bar-example, #food-example {
     color: whitesmoke;
 }
 
-#event, #bars {
+#event, #bar, #restaurant {
     border:ridge;
 }
-.invalid-input{
+
+.invalid-input {
     border-color: red;
     border-style: solid;
     border-width: 2px;
 }
-#bar-image{
+#bar-image, #food-image {
     height: 210px;
     width: 280px;
 }
