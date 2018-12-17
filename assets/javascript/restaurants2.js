@@ -20,37 +20,37 @@ function restaurantsGenerator (response, i) {
     nameHolder.text(restaurantsName);
     restaurantsBox1.append(nameHolder);
 
-//     //Showing Time
-//     var timeHolder = $("<p>");
-//     var eventTime = response.events[i].datetime_local;
-//     var eventTimeConverted = moment(eventTime);
-//     timeHolder.text(moment(eventTimeConverted).format("MMMM DD, YYYY: LT"));
-    // restaurantsBox1.append(timeHolder);
+    //Showing Time
+    var timeHolder = $("<p>");
+    var eventTime = response.events[i].datetime_local;
+    var eventTimeConverted = moment(eventTime);
+    timeHolder.text(moment(eventTimeConverted).format("MMMM DD, YYYY: LT"));
+    restaurantsBox1.append(timeHolder);
 
-    // Showing Image
-    // var photosHolder = $("<img>");
-    // photosHolder.addClass("m-2 rounded");
-    // photosHolder.attr("src", response.restaurants.restaurant[i].photos_url);
-    // photosHolder.attr("id", "restaurants-image");
-    // photosHolder.attr("alt", response.restaurants.restaurant[i].name);
-    // restaurantsBox1.append(photosHolder);
-    // restaurantsHolder.append(restaurantsBox1);
+    //Showing Image
+    var photosHolder = $("<img>");
+    photosHolder.addClass("m-2 rounded");
+    photosHolder.attr("src", response.restaurants.restaurant[i].photos_url);
+    photosHolder.attr("id", "restaurants-image");
+    photosHolder.attr("alt", response.restaurants.restaurant[i].name);
+    restaurantsBox1.append(photosHolder);
+    restaurantsHolder.append(restaurantsBox1);
 
     //Listing Venue
-    // var locationHolder = $("<div>");
-    // var nameHolder = $("<p>");
-    // var locationName = response.restaurants[i].location.name;
-    // nameHolder.text(locationName);
-    // locationHolder.append(nameHolder);
-    // var addressHolder = $("<p>");
-    // var locationAddress = response.restaurants[i].location.address;
-    // addressHolder.text(locationAddress);
-    // locationHolder.append(addressHolder);
-    // var extHolder = $("<p>");
-    // var extAddress = response.restaurants[i].location.extended_address;
-    // extHolder.text(extAddress);
-    // locationHolder.append(extHolder);
-    // restaurantsBox2.append(locationHolder);
+    var locationHolder = $("<div>");
+    var nameHolder = $("<p>");
+    var locationName = response.restaurants[i].location.name;
+    nameHolder.text(locationName);
+    locationHolder.append(nameHolder);
+    var addressHolder = $("<p>");
+    var locationAddress = response.restaurants[i].location.address;
+    addressHolder.text(locationAddress);
+    locationHolder.append(addressHolder);
+    var extHolder = $("<p>");
+    var extAddress = response.restaurants[i].location.extended_address;
+    extHolder.text(extAddress);
+    locationHolder.append(extHolder);
+    restaurantsBox2.append(locationHolder);
 
 //     //Showing tickets URL
 //     var urlHolder = $("<a>");
