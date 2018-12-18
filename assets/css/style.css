@@ -31,7 +31,12 @@
     border-style: solid;
     border-width: 2px;
 }
-#bar-image, #food-image {
-    height: 210px;
-    width: 280px;
+
+img {
+    max-width: 100%;
+    max-height: 210px;
+}
+
+body {
+    background-color: #111111;
 }

@@ -1,7 +1,7 @@
     var validInput = true;
     var latitude = 41.50;
     var longitude = -81.69;
-    var resultNumber = 50;
+    var resultNumber = 20;
     var zipcode;
     var date = moment().format("YYYY-MM-DD");
     $("#date-input").attr("value", date);
@@ -153,12 +153,15 @@
         eventBox1.append(timeHolder);
     
         //Showing Image
-        var imageHolder = $("<img>");
-        imageHolder.addClass("m-2 rounded");
-        imageHolder.attr("src", response.events[i].performers[0].image);
-        imageHolder.attr("id", "performer-image");
-        imageHolder.attr("alt", response.events[i].title);
-        eventBox1.append(imageHolder);
+        var imageUrl = response.events[i].performers[0].image;
+        if (imageUrl != null) {
+            var imageHolder = $("<img>");
+            imageHolder.addClass("m-2 rounded");
+            imageHolder.attr("src", response.events[i].performers[0].image);
+            imageHolder.attr("id", "performer-image");
+            imageHolder.attr("alt", response.events[i].title);
+            eventBox1.append(imageHolder);
+        }
         eventHolder.append(eventBox1);
     
         //Listing Venue
@@ -223,12 +226,15 @@
         eventBox.append(timeHolder);
     
         //Showing Image
-        var imageHolder = $("<img>");
-        imageHolder.addClass("my-2 rounded");
-        imageHolder.attr("src", response.events[i].performers[0].image);
-        imageHolder.attr("id", "performer-image");
-        imageHolder.attr("alt", response.events[i].title);
-        eventBox.append(imageHolder);
+        var imageUrl = response.events[i].performers[0].image;
+        if (imageUrl != null) {
+            var imageHolder = $("<img>");
+            imageHolder.addClass("my-2 rounded");
+            imageHolder.attr("src", response.events[i].performers[0].image);
+            imageHolder.attr("id", "performer-image");
+            imageHolder.attr("alt", response.events[i].title);
+            eventBox.append(imageHolder);
+        }
     
         //Showing tickets URL
         var urlHolder = $("<a>");
