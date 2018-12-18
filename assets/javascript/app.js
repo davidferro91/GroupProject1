@@ -111,9 +111,9 @@
             });
         }
         
-        $("#city-input").val("");
-        $("#zipcode-input").val("");
-        $("#state-input").val("AK");
+        // $("#city-input").val("");
+        // $("#zipcode-input").val("");
+        // $("#state-input").val("AK");
     });
     
     //function to reset error class
