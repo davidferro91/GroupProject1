@@ -79,7 +79,7 @@
                     eventAPICall();
                     barAPICall();
                     restAPICall();
-                    locationDisplayer();
+                    locationDisplayer(response);
                 }        
             });
         }
@@ -108,7 +108,7 @@
                     eventAPICall();
                     barAPICall();
                     restAPICall();
-                    locationDisplayer();
+                    locationDisplayer(response);
                 }
             });
         }
@@ -130,17 +130,18 @@
         return str.join(' ');
       }
 
-    function locationDisplayer () {
+    function locationDisplayer (response) {
         $("#location-display").empty();
         var city = $("#city-input").val().trim();
         console.log(city);
         var state = $("#state-input").val();
         var zipcode = $("#zipcode-input").val();
         console.log(zipcode);
+        console.log(response)
         if (zipcode == "") {
             $("#location-display").append("<h4>" + titleCase(city) + ", " + state + "</h4>");
         } else if (city == "") {
-            $("#location-display").append("<h4>" + zipcode + "</h4>");
+            $("#location-display").append("<h4>" + response.places[0]["place name"] + ", " + response.places[0]["state abbreviation"] + "</h4>");
         } else {
             $("#location-display").append("<h4>" + titleCase(city) + ", " + state + " " + zipcode + "</h4>");
         }
@@ -148,6 +149,7 @@
         $("#zipcode-input").val("");
         $("#state-input").val("AK");
     }
+
     
     function eventGenerator (response, i) {
         var eventHolder =  $("<div>");
