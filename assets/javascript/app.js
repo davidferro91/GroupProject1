@@ -79,6 +79,7 @@
                     eventAPICall();
                     barAPICall();
                     restAPICall();
+                    locationDisplayer();
                 }        
             });
         }
@@ -107,13 +108,10 @@
                     eventAPICall();
                     barAPICall();
                     restAPICall();
+                    locationDisplayer();
                 }
             });
         }
-        
-        $("#city-input").val("");
-        $("#zipcode-input").val("");
-        $("#state-input").val("AK");
     });
     
     //function to reset error class
@@ -122,6 +120,25 @@
         $("#zipcode-input").removeClass("invalid-input");
         $("#date-input").removeClass("invalid-input");
         validInput = true;
+    }
+
+    function locationDisplayer () {
+        $("#location-display").empty();
+        var city = $("#city-input").val().trim();
+        console.log(city);
+        var state = $("#state-input").val();
+        var zipcode = $("#zipcode-input").val();
+        console.log(zipcode);
+        if (zipcode == "") {
+            $("#location-display").append("<h4>" + city + ", " + state + "</h4>");
+        } else if (city == "") {
+            $("#location-display").append("<h4>" + zipcode + "</h4>");
+        } else {
+            $("#location-display").append("<h4>" + city + ", " + state + " " + zipcode + "</h4>");
+        }
+        $("#city-input").val("");
+        $("#zipcode-input").val("");
+        $("#state-input").val("AK");
     }
     
     function eventGenerator (response, i) {
@@ -138,9 +155,18 @@
         var eventBox2 = $("<div>");
         eventBox2.addClass("col-6");
         eventBox2.attr("id", "event-box");
-    
+        
+        if (response.events.length == 0) {
+            var noEvent = $("<h4>");
+            noEvent.text("Sorry, there are no events in this area on this date.");
+            eventBox1.append(noEvent);
+            eventHolder.append(eventBox1);
+            return eventHolder;
+
+        } else {
+
         //Showing Name
-        var titleHolder = $("<p>");
+        var titleHolder = $("<h4>");
         var eventName = response.events[i].title;
         titleHolder.text(eventName);
         eventBox1.append(titleHolder);
@@ -180,14 +206,6 @@
         venueHolder.append(extHolder);
         eventBox2.append(venueHolder);
     
-        //Showing tickets URL
-        var urlHolder = $("<a>");
-        urlHolder.addClass("row p-3");
-        urlHolder.attr("target", "_blank");
-        urlHolder.attr("href", response.events[i].url);
-        urlHolder.text("Buy Tickets Here!");
-        eventBox2.append(urlHolder);
-    
         //Showing Prices Starting At!!:
         var lowestDeal = response.events[i].stats.lowest_price_good_deals;
         var lowestPrice = response.events[i].stats.lowest_price;
@@ -200,8 +218,19 @@
             priceHolder.text("Prices from SeatGeek as low as: $" + lowestPrice);
             eventBox2.append(priceHolder);
         }
+        
+        //Showing tickets URL
+        var urlHolder = $("<a>");
+        urlHolder.addClass("row p-3");
+        urlHolder.attr("target", "_blank");
+        urlHolder.attr("href", response.events[i].url);
+        urlHolder.text("Buy Tickets Here!");
+        eventBox2.append(urlHolder);
+            
         eventHolder.append(eventBox2);
         return eventHolder;
+
+        }
     }
     
     function exampleEventGenerator (response, i) {
@@ -212,8 +241,17 @@
         eventBox.addClass("col");
         eventBox.attr("id", "event-box");
     
+        if (response.events.length == 0) {
+            var noEvent = $("<h4>");
+            noEvent.text("Sorry, there are no events in this area on this date.");
+            eventBox.append(noEvent);
+            eventHolder.append(eventBox);
+            return eventHolder;
+
+        } else {
+
         //Showing Name
-        var titleHolder = $("<p>");
+        var titleHolder = $("<h4>");
         var eventName = response.events[i].title;
         titleHolder.text(eventName);
         eventBox.append(titleHolder);
@@ -245,6 +283,8 @@
         eventBox.append(urlHolder);
         eventHolder.append(eventBox);
         return eventHolder;
+
+        }
     }
     
     function barGenerator (response, i) {
@@ -263,7 +303,7 @@
         barBox2.attr("id", "bar-box");
     
         // Showing bar name
-        var nameHolder = $("<p>");
+        var nameHolder = $("<h4>");
         var barName = response.businesses[i].name;
         nameHolder.text(barName);
         barBox1.append(nameHolder);
@@ -285,10 +325,6 @@
         
         //Listing Address
         var locationHolder = $("<div>");
-        var barNameHolder = $("<p>");
-        var locationName = response.businesses[i].name;
-        barNameHolder.text(locationName);
-        locationHolder.append(barNameHolder);
         for (var j = 0; j < response.businesses[i].location.display_address.length; j++) {
             var barAddressHolder = $("<p>");
             var barAddress = response.businesses[i].location.display_address[j];
@@ -296,15 +332,15 @@
             locationHolder.append(barAddressHolder);
         }
         barBox2.append(locationHolder);
-    
-        //Showing YELP url
-        var barUrl = $("<a>");
-        barUrl.addClass("row p-3");
-        barUrl.attr("target", "_blank");
-        barUrl.attr("href", response.businesses[i].url);
-        barUrl.text("See how we're rated!");
-        barBox2.append(barUrl);
-    
+
+        //Showing Rating
+        var barRating = response.businesses[i].rating;
+        if (barRating > 0) {
+            var barRatingHolder = $("<p>");
+            barRatingHolder.text("Rating: " + barRating);
+            barBox2.append(barRatingHolder);
+        }
+        
         //Showing Price Level
         var barprice = response.businesses[i].price;
         if (barprice != undefined) {
@@ -312,6 +348,15 @@
             priceHolder.text("Price Level: " + barprice);
             barBox2.append(priceHolder);
         }
+        
+        //Showing YELP url
+        var barUrl = $("<a>");
+        barUrl.addClass("row p-3");
+        barUrl.attr("target", "_blank");
+        barUrl.attr("href", response.businesses[i].url);
+        barUrl.text("See more info here!");
+        barBox2.append(barUrl);
+            
         barHolder.append(barBox2);
         return barHolder;
     }
@@ -325,7 +370,7 @@
         barBox.attr("id", "bar-box");
     
         // Showing bar name
-        var nameHolder = $("<p>");
+        var nameHolder = $("<h4>");
         var barName = response.businesses[i].name;
         nameHolder.text(barName);
         barBox.append(nameHolder);
@@ -349,7 +394,7 @@
         barUrl.addClass("row p-3");
         barUrl.attr("target", "_blank");
         barUrl.attr("href", response.businesses[i].url);
-        barUrl.text("See how we're rated!");
+        barUrl.text("See more info here!");
         barBox.append(barUrl);
         barHolder.append(barBox);
         return barHolder;
@@ -371,7 +416,7 @@
         restBox2.attr("id", "rest-box");
     
         // Showing restaurant name
-        var nameHolder = $("<p>");
+        var nameHolder = $("<h4>");
         var restName = response.restaurants[i].restaurant.name;
         nameHolder.text(restName);
         restBox1.append(nameHolder);
@@ -403,22 +448,6 @@
         restAddressHolder.append(restLocHolder);
         restBox2.append(restAddressHolder);
 
-        //Showing Image URL
-        var restImageUrl = $("<a>");
-        restImageUrl.addClass("row p-3");
-        restImageUrl.attr("target", "_blank");
-        restImageUrl.attr("href", response.restaurants[i].restaurant.photos_url);
-        restImageUrl.text("See our images here!");
-        restBox2.append(restImageUrl);
-
-        //Showing Menu URL
-        var restMenuUrl = $("<a>");
-        restMenuUrl.addClass("row p-3");
-        restMenuUrl.attr("target", "_blank");
-        restMenuUrl.attr("href", response.restaurants[i].restaurant.menu_url);
-        restMenuUrl.text("See our menu here!");
-        restBox2.append(restMenuUrl);
-
         //Showing Average Price for Two
         var restPrice = response.restaurants[i].restaurant.average_cost_for_two;
         if (restPrice > 0) {
@@ -435,6 +464,23 @@
             ratingHolder.text(ratingText + " rating: " + userRating);
             restBox2.append(ratingHolder);
         }
+
+        //Showing Image URL
+        var restImageUrl = $("<a>");
+        restImageUrl.addClass("row p-3");
+        restImageUrl.attr("target", "_blank");
+        restImageUrl.attr("href", response.restaurants[i].restaurant.photos_url);
+        restImageUrl.text("See our images here!");
+        restBox2.append(restImageUrl);
+
+        //Showing Menu URL
+        var restMenuUrl = $("<a>");
+        restMenuUrl.addClass("row p-3");
+        restMenuUrl.attr("target", "_blank");
+        restMenuUrl.attr("href", response.restaurants[i].restaurant.menu_url);
+        restMenuUrl.text("See our menu here!");
+        restBox2.append(restMenuUrl);
+
         restHolder.append(restBox2);
         return restHolder;
     }
@@ -448,7 +494,7 @@
         restBox.attr("id", "rest-box");
     
         // Showing restaurant name
-        var nameHolder = $("<p>");
+        var nameHolder = $("<h4>");
         var restName = response.restaurants[i].restaurant.name;
         nameHolder.text(restName);
         restBox.append(nameHolder);
