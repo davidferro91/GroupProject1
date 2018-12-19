@@ -122,6 +122,14 @@
         validInput = true;
     }
 
+    function titleCase(str) {
+        str = str.toLowerCase().split(' ');
+        for (var i = 0; i < str.length; i++) {
+            str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+        }
+        return str.join(' ');
+      }
+
     function locationDisplayer () {
         $("#location-display").empty();
         var city = $("#city-input").val().trim();
@@ -130,11 +138,11 @@
         var zipcode = $("#zipcode-input").val();
         console.log(zipcode);
         if (zipcode == "") {
-            $("#location-display").append("<h4>" + city + ", " + state + "</h4>");
+            $("#location-display").append("<h4>" + titleCase(city) + ", " + state + "</h4>");
         } else if (city == "") {
             $("#location-display").append("<h4>" + zipcode + "</h4>");
         } else {
-            $("#location-display").append("<h4>" + city + ", " + state + " " + zipcode + "</h4>");
+            $("#location-display").append("<h4>" + titleCase(city) + ", " + state + " " + zipcode + "</h4>");
         }
         $("#city-input").val("");
         $("#zipcode-input").val("");
